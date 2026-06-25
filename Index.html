@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crazy 8s Arena</title>
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+        const socket = io("https://ubiquitous-palm-tree-vp6xx4jgpvg4fpg4x-3000.app.github.dev");
+        socket.on("connect", () => {
+            console.log("Connected to game server! ID:", socket.id);
+        });
+    </script>
+    <style>
+        body { font-family: sans-serif; background: #1a1a2e; color: white; text-align: center; margin: 0; padding: 20px; }
+        .table { border: 2px solid #e43f5a; border-radius: 15px; padding: 20px; background: #162447; margin-top: 50px; }
+        .profile-box { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 20px 0; }
+        .avatar { width: 60px; height: 60px; border-radius: 50%; border: 3px solid #00fff0; background: #333; }
+        .btn { background: #e43f5a; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>🎴 Crazy 8s Multiplayer 🎴</h2>
+    <div class="table">
+        <div class="profile-box">
+            <div class="avatar" id="player-avatar"></div>
+            <h3 id="player-name">Loading Player...</h3>
+        </div>
+        <p>Welcome to the game room! The server setup is next.</p>
+        <button class="btn">Create Game Room</button>
+    </div>
+
+    <script>
+        // Initialize Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.expand(); 
+        const username = tg.initDataUnsafe?.user?.first_name || "Player";
+        document.getElementById('player-name').innerText = username;
+    </script>
+</body>
+</html>
+
